@@ -562,6 +562,111 @@ body {
     margin-bottom: 14px;
 }
 
+.struktur-wrap {
+    margin-bottom: 26px;
+}
+
+.struktur-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--purple);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin: 18px 0 10px;
+}
+
+.struktur-label:first-child {
+    margin-top: 0;
+}
+
+.struktur-top {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.struktur-mid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+}
+
+.struktur-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    padding: 14px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.struktur-card.top {
+    padding: 18px 14px;
+    border: 2px solid var(--purple);
+}
+
+.struktur-badge {
+    display: inline-block;
+
+    background: var(--purple);
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .3px;
+
+    padding: 3px 10px;
+    border-radius: 20px;
+
+    margin-bottom: 8px;
+}
+
+.struktur-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    margin: 0 auto 8px;
+
+    border-radius: 12px;
+
+    background: var(--border);
+
+    overflow: hidden;
+}
+
+.struktur-card.top .struktur-photo {
+    aspect-ratio: 4 / 3;
+}
+
+.struktur-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.struktur-name {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.struktur-card.top .struktur-name {
+    font-size: 15px;
+}
+
+.struktur-empty-card {
+    cursor: default;
+    opacity: .6;
+    border-style: dashed;
+}
+
+.struktur-empty {
+    font-size: 11px;
+    color: var(--muted);
+}
+
 .student-grid {
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -580,12 +685,12 @@ body {
 }
 
 .student-photo {
-    width: 64px;
-    height: 64px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
 
     margin: 0 auto 10px;
 
-    border-radius: 50%;
+    border-radius: 12px;
 
     background: var(--border);
 
@@ -1277,7 +1382,7 @@ footer {
 
         <div class="wali-photo">
             <img
-                src=""
+                src="https://i.ibb.co.com/s9PS9HK6/IMG-20260910-WA0027.jpg"
                 alt="Foto Wali Kelas"
                 onerror="this.src='https://placehold.co/200x200/f0f0f2/777?text=Foto'"
             >
@@ -1357,6 +1462,16 @@ footer {
     <div class="section-sub" id="profilSub">
         Kelas 11 TKJ 2 &middot; SMKN Situraja
     </div>
+
+    <div class="struktur-wrap">
+
+        <div class="struktur-label">Struktur Organisasi Kelas</div>
+        <div class="struktur-top" id="strukturTop"></div>
+        <div class="struktur-mid" id="strukturMid"></div>
+
+    </div>
+
+    <div class="struktur-label">Semua Siswa</div>
 
     <input
         type="text"
@@ -1575,20 +1690,63 @@ footer {
 
 const students = [
 
-  { id: 1, name: "Aira", absen: "1", gender: "P", photo: "https://i.ibb.co.com/ym60DW1S/Picsart-26-09-08-19-21-25-559.jpg" },
-  { id: 2, name: "Alin", absen: "2", gender: "P", photo: "https://i.ibb.co.com/FqKQXGG4/Picsart-26-09-08-19-21-56-689.jpg" },
-  { id: 3, name: "Asep", absen: "3", gender: "L", photo: "https://i.ibb.co.com/Z6CmnK6F/Picsart-26-09-08-19-23-08-410.jpg" },
+  { id: 1, name: "Gian Rohiman", absen: "15", gender: "L", photo: "https://i.ibb.co.com/PGbfyS6M/IMG-20260910-WA0003-1-2.jpg", role: "Ketua Kelas" },
+  { id: 2, name: "Nizam Alfa Rezal", absen: "28", gender: "L", photo: "https://i.ibb.co.com/sd9FbJqq/IMG-20260910-WA0014.jpg", role: "Wakil Ketua" },
+  { id: 3, name: "Tamara Putri Kinanti", absen: "37", gender: "P", photo: "https://i.ibb.co.com/3yQV9t3S/IMG-20260910-WA0026.jpg", role: "Sekretaris 1" },
+  { id: 4, name: "Keyla Rivania", absen: "20", gender: "P", photo: "https://i.ibb.co.com/fz0KXYpZ/IMG-20260910-WA0057.jpg", role: "Sekretaris 2" },
+  { id: 5, name: "Sofa Fauziawati", absen: "36", gender: "P", photo: "https://i.ibb.co.com/TxqnpkNM/IMG-20260910-WA0018-2.jpg", role: "Bendahara 1" },
+  { id: 6, name: "Dhea Aulia", absen: "11", gender: "P", photo: "https://i.ibb.co.com/VYxBN2CX/IMG-20260910-WA0046.jpg", role: "Bendahara 2" },
+  { id: 7, name: "Aira Suryani", absen: "1", gender: "P", photo: "none.jpg" },
+  { id: 8, name: "Alin Rosalina", absen: "2", gender: "P", photo: "https://i.ibb.co.com/sk2NT2N/IMG-20260910-WA0028.jpg" },
+  { id: 9, name: "Anisa Nurfadilah", absen: "3", gender: "L", photo: "https://link-foto.jpg" },
+  { id: 10, name: "Annisa Agus Fini", absen: "5", gender: "P", photo: "https://i.ibb.co.com/fVhxDYbr/IMG-20260910-WA0045-2.jpg" },
+  { id: 11, name: "Ayang Diva Nur Sipa", absen: "7", gender: "P", photo: "https://i.ibb.co.com/0y9Lc2CR/IMG-20260910-WA0029.jpg" },
+  { id: 12, name: "Delia Siti Fathonah", absen: "11", gender: "P", photo: "https://link-foto.jpg" },
+  { id: 13, name: "Dini Amelia", absen: "13", gender: "P", photo: "https://link-foto.jpg" },        
+  { id: 14, name: "Epi Purniawati", absen: "14", gender: "P", photo: "https://i.ibb.co.com/fGTb7vKq/IMG-20260910-WA0048.jpg" },
+  { id: 15, name: "Indri Novianti", absen: "17", gender: "P", photo: "https://i.ibb.co.com/hJnwfRPC/IMG-20260910-WA0044.jpg" },
+  { id: 16, name: "Iva Sry Febriani", absen: "19", gender: "P", photo: "https://i.ibb.co.com/qL3qBYYV/IMG-20260910-WA0040.jpg" },
+  { id: 17, name: "Kirana Sifa", absen: "21", gender: "P", photo: "https://i.ibb.co.com/TqRTpQSM/IMG-20260910-WA0006.jpg" },
+  { id: 18, name: "Meli Sulistiawati", absen: "22", gender: "P", photo: "https://i.ibb.co.com/11Wd9mk/IMG-20260910-WA0007-2.jpg" },
+  { id: 19, name: "Nadilah Agung Pratiwi", absen: "26", gender: "P", photo: "https://i.ibb.co.com/5gVKJL8k/IMG-20260910-WA0004.jpg" },
+  { id: 20, name: "Neta Ririn Haryanti", absen: "27", gender: "P", photo: "https://link-foto.jpg" },
+  { id: 21, name: "Nuraini", absen: "01", gender: "29", photo: "https://i.ibb.co.com/35BRqF8s/IMG-20260910-WA0041-2.jpg" },
+  { id: 22, name: "Nurnaila", absen: "30", gender: "P", photo: "https://i.ibb.co.com/Lz453fg1/IMG-20260910-WA0043.jpg" },
+  { id: 23, name: "Rinasih", absen: "32", gender: "P", photo: "https://i.ibb.co.com/GvDzw4RT/IMG-20260910-WA0076-2.jpg" },
+  { id: 24, name: "Rini Fitriyani", absen: "33", gender: "P", photo: "https://i.ibb.co.com/1txQmsqd/IMG-20260910-WA0042-2.jpg" },
+  { id: 25, name: "Risa Siti Nurwahidah", absen: "34", gender: "P", photo: "https://i.ibb.co.com/wNHrGf0V/IMG-20260910-WA0075-2.jpg" },
+  { id: 26, name: "Windy Winangsih", absen: "40", gender: "P", photo: "https://i.ibb.co.com/Zp36rBSg/IMG-20260910-WA0074.jpg" },
+  { id: 27, name: "Zaharatusshita Anjani Indriani", absen: "42", gender: "P", photo: "https://i.ibb.co.com/xt3T6xz0/IMG-20260910-WA0049.jpg" },
+  { id: 28, name: "Andri Kusumah Dinata", absen: "3", gender: "L", photo: "https://i.ibb.co.com/GfJq6Yc1/Picsart-26-09-10-17-12-33-490.jpg" },
+  { id: 29, name: "Asep Sahidin", absen: "6", gender: "L", photo: "https://i.ibb.co.com/yc8LMrRg/IMG-20260910-WA0035.jpg" },
+  { id: 30, name: "Asep Supriatna", absen: "42", gender: "L", photo: "https://i.ibb.co.com/VWNS1KNk/Picsart-26-09-10-17-13-38-680.jpg" },
+  { id: 31, name: "Daffa Arkana Agung Prasetyo", absen: "8", gender: "L", photo: "https://i.ibb.co.com/x8MyckbN/IMG-20260910-WA0056.jpg" },
+  { id: 32, name: "Deni Apryiadi", absen: "10", gender: "L", photo: "https://i.ibb.co.com/Jw0cvcDm/IMG-20260910-WA0015-2.jpg" },
+  { id: 33, name: "Dika Saepudin", absen: "12", gender: "L", photo: "none.jpg" },
+  { id: 34, name: "Hari Dwi Prasetyo", absen: "16", gender: "L", photo: "https://i.ibb.co.com/bgWJKDQw/IMG-20260712-002005-366-2.jpg" },
+  { id: 35, name: "Irham Hafiz", absen: "18", gender: "L", photo: "https://i.ibb.co.com/DPp5gMc0/IMG-20260910-WA0017.jpg" },
+  { id: 36, name: "Muhamad Alif Annjiar", absen: "23", gender: "L", photo: "https://i.ibb.co.com/Lh2dYsBk/IMG-20260910-WA0010-3.jpg" },
+  { id: 37, name: "Muhamad Taufik", absen: "24", gender: "L", photo: "https://i.ibb.co.com/DPQvNL5L/Picsart-26-09-10-17-26-58-569.jpg" },
+  { id: 38, name: "Muhammad Ridwan Nur Arifin", absen: "25", gender: "L", photo: "none.jpg" },
+  { id: 39, name: "Rehan Ali Mandegar", absen: "31", gender: "L", photo: "https://i.ibb.co.com/Z1djTcHS/IMG-20260910-WA0051-2.jpg" },
+  { id: 40, name: "Rudianto", absen: "35", gender: "L", photo: "https://i.ibb.co.com/QFsnnydJ/IMG-20260910-WA0002-2.jpg" },
+  { id: 41, name: "Vian Taufik Azhar", absen: "39", gender: "L", photo: "https://i.ibb.co.com/zHRH24T4/IMG-20260910-WA0055-3.jpg" },
+  { id: 42, name: "Wq Agatha Saputra", absen: "41", gender: "L", photo: "https://i.ibb.co.com/rR7gnZJm/IMG-20260910-WA0005-2.jpg" },
+  
+  
     // COPY baris di atas buat nambah siswa. gender: "L" atau "P"
+    // Kalau siswa punya jabatan, tambahin role: "Ketua Kelas" / "Wakil Ketua" / "Sekretaris 1" / "Sekretaris 2" / "Bendahara 1" / "Bendahara 2"
+    // Siswa biasa TIDAK usah dikasih role sama sekali (skip aja field-nya)
 ];
 
 const piket = {
-    "Senin":  ["Andri","Asep New","Gian","M.Ridwan",
+    "Senin":  ["Andri","Gian","M.Ridwan",
               "Wq","Ayang","Indri",
               "Nadilah","Rini"],
-    "Selasa": ["Asep","Hari","Nizam",
+    "Selasa": ["Asep Old","Hari","Nizam",
               "Aira","Delia","Iva",
               "Neta","Risa","Zahara"],
-    "Rabu":   ["Daffa","Irham","Rehan",
+    "Rabu":   ["Daffa","Irham","Rehan","Asep New",
               "Alin","Dhea","Keyla",
               "Nuraini","Sofa"],
     "Kamis":  ["Deni","M.Alif","Rudi",
@@ -1760,13 +1918,19 @@ function renderStudents() {
             genderFilter === "semua" ||
             s.gender === genderFilter;
 
-        return matchName && matchGender;
+        const notPengurus = !s.role;
+        // siswa yang punya "role" (pengurus kelas) disembunyikan dari sini,
+        // soalnya udah muncul di section Struktur Organisasi Kelas
+
+        return matchName && matchGender && notPengurus;
 
     });
 
 
+    const totalNonPengurus = students.filter(s => !s.role).length;
+
     document.getElementById("resultCount").textContent =
-        `Menampilkan ${filtered.length} dari ${students.length} siswa`;
+        `Menampilkan ${filtered.length} dari ${totalNonPengurus} siswa`;
 
 
     const grid = document.getElementById("studentGrid");
@@ -1807,6 +1971,51 @@ function renderStudents() {
 }
 
 
+function renderStruktur() {
+
+    function cardFor(role, label, isTop) {
+
+        const s = students.find(x => x.role === role);
+
+        if (!s) {
+            return `
+                <div class="struktur-card ${isTop ? "top" : ""} struktur-empty-card">
+                    <div class="struktur-badge">${label}</div>
+                    <div class="struktur-photo"></div>
+                    <div class="struktur-empty">Belum diisi</div>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="struktur-card ${isTop ? "top" : ""}" onclick="openStudentModal(${s.id})">
+                <div class="struktur-badge">${label}</div>
+                <div class="struktur-photo">
+                    <img
+                        src="${s.photo || ''}"
+                        alt="${s.name}"
+                        onerror="this.src='https://placehold.co/150x150/f0f0f2/777?text=Foto'"
+                    >
+                </div>
+                <div class="struktur-name">${s.name}</div>
+            </div>
+        `;
+
+    }
+
+    document.getElementById("strukturTop").innerHTML =
+        cardFor("Ketua Kelas", "Ketua Kelas", true) +
+        cardFor("Wakil Ketua", "Wakil Ketua", true);
+
+    document.getElementById("strukturMid").innerHTML =
+        cardFor("Sekretaris 1", "Sekretaris 1", false) +
+        cardFor("Sekretaris 2", "Sekretaris 2", false) +
+        cardFor("Bendahara 1", "Bendahara 1", false) +
+        cardFor("Bendahara 2", "Bendahara 2", false);
+
+}
+
+
 function openStudentModal(id) {
 
     const s = students.find(x => x.id === id);
@@ -1816,7 +2025,8 @@ function openStudentModal(id) {
 
     document.getElementById("modalStudentPhoto").src = s.photo || "";
     document.getElementById("modalStudentName").textContent = s.name;
-    document.getElementById("modalStudentAbsen").textContent = "No. Absen: " + s.absen;
+    document.getElementById("modalStudentAbsen").textContent =
+        "No. Absen: " + s.absen + (s.role ? "  ·  " + s.role : "");
     document.getElementById("modalStudentGender").textContent =
         s.gender === "L" ? "♂ Laki-laki" : "♀ Perempuan";
 
@@ -2067,6 +2277,7 @@ function updateNowPlaying(song, isPlaying) {
 ========================= */
 
 renderStudents();
+renderStruktur();
 renderPiket();
 renderStats();
 renderSongs();
