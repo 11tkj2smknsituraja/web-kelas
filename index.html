@@ -809,43 +809,65 @@ body {
 .piket-grid {
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    gap: 12px;
+    gap: 14px;
 }
 
 .piket-card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 18px;
+    padding: 18px 16px;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
 
-    padding: 16px;
+.piket-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(108,77,246,.12);
 }
 
 .piket-day {
     color: var(--purple);
     font-weight: 800;
     font-size: 14px;
-
-    margin-bottom: 10px;
-
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+}
+
+.piket-day-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--purple), #4b32c3);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
 }
 
 .piket-names {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 7px;
 }
 
 .piket-pill {
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 20px;
-
-    padding: 5px 10px;
-
+    padding: 6px 12px;
     font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    transition: background .15s, border-color .15s;
+}
+
+.piket-pill:hover {
+    border-color: var(--purple);
+    background: rgba(108,77,246,.08);
 }
 
 
@@ -893,31 +915,48 @@ body {
     padding: 20px 10px 8px;
 }
 
-.video-wrap {
-    width: min(320px,100%);
-    aspect-ratio: 9/16;
-
-    margin: 0 auto 10px;
-
-    border-radius: 16px;
-
-    overflow: hidden;
-
-    background: var(--card);
-    border: 1px solid var(--border);
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 20px;
 }
 
-.video-wrap iframe {
+@media (min-width: 640px) {
+    .video-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.video-wrap {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 9 / 16;
+    margin: 0 auto;
+
+    border-radius: 16px;
+    overflow: hidden;
+
+    background: #000;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+
+.video-wrap video {
     width: 100%;
     height: 100%;
     border: none;
+    object-fit: cover;
+    background: #000;
+    display: block;
 }
 
 .video-caption {
     text-align: center;
-
     font-size: 13px;
     font-weight: 700;
+    color: var(--muted);
+    margin-top: 8px;
 }
 
 
@@ -968,6 +1007,59 @@ body {
     color: white;
 
     font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.18);
+    color: white;
+
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background .2s;
+}
+
+.lightbox-nav:hover {
+    background: rgba(255,255,255,.3);
+}
+
+.lightbox-prev {
+    left: 12px;
+}
+
+.lightbox-next {
+    right: 12px;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: rgba(255,255,255,.8);
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(0,0,0,.4);
+    padding: 4px 12px;
+    border-radius: 20px;
 }
 
 
@@ -1191,6 +1283,156 @@ body {
 }
 
 
+/* ========= SPOTIFY PLAYLIST CARD ========= */
+
+.spotify-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    background: linear-gradient(135deg, #1DB954, #191414);
+    color: white;
+
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(29,185,84,.25);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.spotify-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(29,185,84,.35);
+}
+
+.spotify-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.spotify-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.spotify-title {
+    font-size: 15px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.spotify-sub {
+    font-size: 12px;
+    opacity: .85;
+    margin-top: 2px;
+}
+
+.spotify-arrow {
+    font-size: 22px;
+    opacity: .8;
+    flex-shrink: 0;
+}
+
+
+/* ========= DEVELOPER ========= */
+
+.dev-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 32px 22px;
+    text-align: center;
+    max-width: 420px;
+    margin: 0 auto;
+    box-shadow: 0 8px 28px rgba(0,0,0,.06);
+}
+
+.dev-photo {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--purple);
+    background: var(--border);
+}
+
+.dev-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dev-name {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.dev-role {
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.dev-bio {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 18px;
+}
+
+.dev-skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.dev-skill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dev-social {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.dev-social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af);
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(221,42,123,.25);
+}
+
+
 /* ========= FOOTER ========= */
 
 footer {
@@ -1281,7 +1523,7 @@ footer {
 
 </style>
 </head>
-<body class="splash-active">
+<body class="splash-active dark">
 
 
 <!-- ========= SPLASH SCREEN ========= -->
@@ -1316,8 +1558,8 @@ footer {
             <!-- GANTI nama kelas -->
         </div>
 
-        <button class="icon-btn" onclick="toggleDark()" title="Dark Mode">
-            🌙
+        <button class="icon-btn" id="themeBtn" onclick="toggleDark()" title="Ganti Tema">
+            ☀️
         </button>
     </div>
 
@@ -1341,6 +1583,10 @@ footer {
 
         <button class="tab-btn" data-page="musik" onclick="showPage('musik')">
             🎵 Musik
+        </button>
+
+        <button class="tab-btn" data-page="developer" onclick="showPage('developer')">
+            &lt;/&gt; Developer
         </button>
 
     </div>
@@ -1370,9 +1616,8 @@ footer {
             <!-- GANTI quote kelas -->
         </div>
 
-        <a href="https://www.instagram.com/eleventwo_engineer?stkn=MXdodmZoMHA4ajFwdA==" class="hero-ig" target="">
+        <a href="https://www.instagram.com/eleventwo.engineer" class="hero-ig" target="_blank" rel="noopener">
             📷 Instagram Kelas
-            <!-- GANTI link instagram kelas kalau ada -->
         </a>
 
     </div>
@@ -1391,8 +1636,7 @@ footer {
 
         <div>
             <div class="wali-name">
-                Bu Melinda Nurdianti, S.Pd.,Gr
-                <!-- GANTI -->
+                Ibu Melinda Nurdianti, S.Pd., Gr
             </div>
 
             <div class="wali-role">
@@ -1400,8 +1644,7 @@ footer {
             </div>
 
             <div class="wali-quote">
-                "“Ilmu membuatmu pintar, tapi adab membuatmu dihormati. Jaga lisanmu dengan tiga kata ajaib: maaf, tolong, dan terima kasih.”"
-                <!-- GANTI -->
+                "Ilmu membuatmu pintar, tapi adab membuatmu dihormati. Jaga lisanmu dengan tiga kata ajaib: maaf, tolong, dan terima kasih."
             </div>
         </div>
 
@@ -1535,7 +1778,7 @@ footer {
                 alt=""
                 onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
             >
-            <div class="galeri-caption">Olahraga</div>
+            <div class="galeri-caption"></div>
         </div>
 
         <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
@@ -1544,7 +1787,7 @@ footer {
                 alt=""
                 onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
             >
-            <div class="galeri-caption">Selsai Upacara</div>
+            <div class="galeri-caption"></div>
         </div>
 
         <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
@@ -1553,8 +1796,35 @@ footer {
                 alt=""
                 onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
             >
-            <div class="galeri-caption">Pramuka</div>
+            <div class="galeri-caption"></div>
         </div>
+
+      <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
+            <img
+                src="https://i.ibb.co.com/B19g90M/IMG-20260907-WA0012.jpg"
+                alt=""
+                onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
+            >
+            <div class="galeri-caption"></div>
+      </div>
+
+      <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
+            <img
+                src="https://i.ibb.co.com/mFV03Ymr/IMG-20260625-WA0014.jpg"
+                alt=""
+                onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
+            >
+            <div class="galeri-caption"></div>
+      </div>
+
+      <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
+            <img
+                src="https://i.ibb.co.com/7xLfC6rG/IMG-20260617-WA0007.jpg"
+                alt=""
+                onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
+            >
+            <div class="galeri-caption"></div>
+      </div>
 
       <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
             <img
@@ -1562,16 +1832,16 @@ footer {
                 alt=""
                 onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
             >
-            <div class="galeri-caption">Lomba Kostum</div>
+            <div class="galeri-caption"></div>
       </div>
 
       <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
             <img
-                src="https://i.ibb.co.com/VW6VqHxn/IMG-20260827-WA0002.jpg"
+                src="https://i.ibb.co.com/DD30XS2M/IMG-20260910-WA0060.jpg"
                 alt=""
                 onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
             >
-            <div class="galeri-caption">Bersih-Bersih</div>
+            <div class="galeri-caption"></div>
       </div>
 
       <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
@@ -1580,8 +1850,18 @@ footer {
                 alt=""
                 onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
             >
-            <div class="galeri-caption">Latihan Upacara</div>
+            <div class="galeri-caption"></div>
       </div>
+
+      <div class="galeri-item" onclick="openLightbox(this.querySelector('img').src)">
+            <img
+                src="https://i.ibb.co.com/j99kYk3t/IMG-20260910-WA0063.jpg"
+                alt=""
+                onerror="this.src='https://placehold.co/400x400/f0f0f2/777?text=Kegiatan'"
+            >
+            <div class="galeri-caption"></div>
+      </div>
+      
 
         <!-- COPY blok .galeri-item di atas kalau mau nambah foto -->
 
@@ -1591,15 +1871,32 @@ footer {
     <div class="section-title">Dokumentasi</div>
     <div class="section-heading">Video Kelas</div>
 
-    <div class="video-wrap">
-        <iframe
-            src="https://yourimageshare.com/ib/ZNSyCcJkOf.mp4"
-            allowfullscreen>
-        </iframe>
-    </div>
+    <div class="video-grid">
+        <div>
+            <div class="video-wrap">
+                <video
+                    class="kelas-video"
+                    src="https://yourimageshare.com/ib/ZNSyCcJkOf.mp4"
+                    controls
+                    playsinline
+                    preload="metadata">
+                </video>
+            </div>
+            <div class="video-caption">Video Profil Kelas 11 TKJ 2</div>
+        </div>
 
-    <div class="video-caption">
-        Video Profil Kelas 11 TKJ 2
+        <div>
+            <div class="video-wrap">
+                <video
+                    class="kelas-video"
+                    src="https://fancy-yellow-6yuaidti.edgeone.dev/"
+                    controls
+                    playsinline
+                    preload="metadata">
+                </video>
+            </div>
+            <div class="video-caption">Video Kedua</div>
+        </div>
     </div>
 
 </div>
@@ -1614,7 +1911,64 @@ footer {
         Pilih dan putar lagu favoritmu.
     </div>
 
+    <!-- Playlist Spotify Kelas -->
+    <a href="https://open.spotify.com/playlist/7ahy09FbovyLpOupk8ekLI?si=a75wFYbQQUqeMNtnYQE8Kw" target="_blank" rel="noopener" class="spotify-card">
+        <div class="spotify-icon">🎧</div>
+        <div class="spotify-info">
+            <div class="spotify-title">all the feels playlist</div>
+            <div class="spotify-sub">Playlist resmi kelas · Buka di Spotify</div>
+        </div>
+        <div class="spotify-arrow">›</div>
+    </a>
+
     <div class="song-grid" id="songGrid"></div>
+
+</div>
+
+
+<!-- ========= PAGE: DEVELOPER ========= -->
+<div class="page" id="page-developer">
+
+    <div class="section-title">Pembuat Website</div>
+    <div class="section-heading">&lt;/&gt; Profil Developer</div>
+    <div class="section-sub">
+        "Kode adalah seni, dan setiap seni punya cerita."
+    </div>
+
+    <div class="dev-card">
+
+        <div class="dev-photo">
+            <img
+                src="https://placehold.co/200x200/6c4df6/ffffff?text=Dev"
+                alt="Foto Developer"
+                onerror="this.src='https://placehold.co/200x200/6c4df6/ffffff?text=Dev'"
+            >
+            <!-- GANTI src dengan foto lu -->
+        </div>
+
+        <div class="dev-name">Hari Dwi Prasetyo</div>
+        <!-- GANTI nama -->
+
+        <div class="dev-role">Have Funr</div>
+        <!-- GANTI role kalau mau -->
+
+        <div class="dev-bio">
+            "Halo Saya pembuat website kelas 11 TKJ 2. Senang deh bisa bikin web kelas, meskipun dibantu sedikit sedikit sama AI Hahaha."
+            <!-- GANTI bio / tentang diri lu -->
+        </div>
+
+        <div class="dev-skills">
+            <span class="dev-skill">HTML</span>
+            <span class="dev-skill">CSS</span>
+            <span class="dev-skill">JavaScript</span>
+        </div>
+
+        <div class="dev-social">
+            <a href="https://www.instagram.com/_hariiidp31?stkn=ZXBreTJkZmIwZmpn" target="_blank" rel="noopener" class="dev-social-btn">📷 Instagram</a>
+            <!-- GANTI link Instagram lu -->
+        </div>
+
+    </div>
 
 </div>
 
@@ -1661,9 +2015,14 @@ footer {
 <!-- ========= LIGHTBOX ========= -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
 
-    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <button class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">×</button>
 
-    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); lightboxNav(-1)">‹</button>
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); lightboxNav(1)">›</button>
+
+    <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+
+    <div class="lightbox-counter" id="lightboxCounter"></div>
 
 </div>
 
@@ -1709,7 +2068,7 @@ const students = [
   { id: 17, name: "Kirana Sifa", absen: "21", gender: "P", photo: "https://i.ibb.co.com/TqRTpQSM/IMG-20260910-WA0006.jpg" },
   { id: 18, name: "Meli Sulistiawati", absen: "22", gender: "P", photo: "https://i.ibb.co.com/11Wd9mk/IMG-20260910-WA0007-2.jpg" },
   { id: 19, name: "Nadilah Agung Pratiwi", absen: "26", gender: "P", photo: "https://i.ibb.co.com/5gVKJL8k/IMG-20260910-WA0004.jpg" },
-  { id: 20, name: "Neta Ririn Haryanti", absen: "27", gender: "P", photo: "https://i.ibb.co.com/TBYJDZ7Z/IMG-20260910-WA0087.jpg" },
+  { id: 20, name: "Neta Ririn Haryanti", absen: "27", gender: "P", photo: "https://link-foto.jpg" },
   { id: 21, name: "Nuraini", absen: "29", gender: "P", photo: "https://i.ibb.co.com/Lz453fg1/IMG-20260910-WA0043.jpg" },
   { id: 22, name: "Nurnaila", absen: "30", gender: "P", photo: "https://i.ibb.co.com/35BRqF8s/IMG-20260910-WA0041-2.jpg" },
   { id: 23, name: "Rinasih", absen: "32", gender: "P", photo: "https://i.ibb.co.com/GvDzw4RT/IMG-20260910-WA0076-2.jpg" },
@@ -1836,7 +2195,14 @@ const songs = [
    NAVIGASI TAB
 ========================= */
 
-function showPage(name) {
+function showPage(name, push = true) {
+
+    // Kalau keluar dari Gallery, pause SEMUA video biar musik bisa nyala lagi
+    if (name !== "gallery") {
+        document.querySelectorAll(".kelas-video").forEach(v => {
+            if (!v.paused) v.pause();
+        });
+    }
 
     document.querySelectorAll(".page")
         .forEach(p => p.classList.remove("active"));
@@ -1851,19 +2217,36 @@ function showPage(name) {
     document.querySelector(`.tab-btn[data-page="${name}"]`)
         .classList.add("active");
 
-
-    // begitu masuk tab galeri, langsung stel lagu ke-5
-    if (name === "gallery" && songs.length > 0 && !currentAudio) {
-        playSong(songs[4].id);
+    // Biar tombol kembali HP/browser bisa dipake
+    if (push) {
+        history.pushState({ page: name }, "", "#" + name);
     }
 
 }
 
+// Saat user pencet tombol kembali
+window.addEventListener("popstate", (e) => {
+    const page = (e.state && e.state.page) || "beranda";
+    showPage(page, false);
+});
+
+// Set state awal + support hash URL
+(function initPageHistory() {
+    const hash = location.hash.replace("#", "");
+    if (hash && document.getElementById("page-" + hash)) {
+        showPage(hash, false);
+    } else {
+        history.replaceState({ page: "beranda" }, "", "#beranda");
+    }
+})();
+
 
 function toggleDark() {
-
     document.body.classList.toggle("dark");
-
+    const btn = document.getElementById("themeBtn");
+    if (btn) {
+        btn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
 }
 
 
@@ -2057,7 +2440,10 @@ function renderPiket() {
 
         <div class="piket-card">
 
-            <div class="piket-day">📅 ${day}</div>
+            <div class="piket-day">
+                <span class="piket-day-icon">📅</span>
+                ${day}
+            </div>
 
             <div class="piket-names">
                 ${
@@ -2093,23 +2479,55 @@ function renderStats() {
 
 
 /* =========================
-   LIGHTBOX
+   LIGHTBOX (dengan navigasi ← →)
 ========================= */
 
-function openLightbox(src) {
+let lightboxImages = [];
+let lightboxIndex = 0;
 
-    document.getElementById("lightboxImg").src = src;
-
-    document.getElementById("lightbox").classList.add("open");
-
+function getGalleryImages() {
+    return [...document.querySelectorAll(".galeri-item img, #fotoKelasImg")]
+        .map(img => img.src)
+        .filter(src => src && !src.includes("placehold.co"));
 }
 
+function openLightbox(src) {
+    lightboxImages = getGalleryImages();
+    lightboxIndex = lightboxImages.indexOf(src);
+    if (lightboxIndex < 0) lightboxIndex = 0;
+
+    updateLightbox();
+    document.getElementById("lightbox").classList.add("open");
+}
+
+function updateLightbox() {
+    if (!lightboxImages.length) return;
+
+    document.getElementById("lightboxImg").src = lightboxImages[lightboxIndex];
+    document.getElementById("lightboxCounter").textContent =
+        `${lightboxIndex + 1} / ${lightboxImages.length}`;
+}
+
+function lightboxNav(dir) {
+    if (!lightboxImages.length) return;
+
+    lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+    updateLightbox();
+}
 
 function closeLightbox() {
-
     document.getElementById("lightbox").classList.remove("open");
-
 }
+
+// Support swipe / keyboard
+document.addEventListener("keydown", (e) => {
+    const lb = document.getElementById("lightbox");
+    if (!lb.classList.contains("open")) return;
+
+    if (e.key === "ArrowLeft") lightboxNav(-1);
+    if (e.key === "ArrowRight") lightboxNav(1);
+    if (e.key === "Escape") closeLightbox();
+});
 
 
 /* =========================
@@ -2281,6 +2699,60 @@ renderStruktur();
 renderPiket();
 renderStats();
 renderSongs();
+
+/* =========================
+   VIDEO ↔ MUSIK SYNC (multi video)
+========================= */
+
+function pauseMusicForVideo() {
+    if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+
+        if (currentSongId) {
+            const btn = document.getElementById(`playBtn-${currentSongId}`);
+            if (btn) btn.textContent = "▶";
+            document.getElementById(`songCard-${currentSongId}`)?.classList.remove("playing");
+        }
+
+        document.getElementById("nowPlayingBtn").textContent = "▶";
+    }
+}
+
+function resumeMusicAfterVideo() {
+    // Cek dulu apakah masih ada video yang lagi play
+    const adaYangPlay = [...document.querySelectorAll(".kelas-video")]
+        .some(v => !v.paused && !v.ended);
+
+    if (adaYangPlay) return; // masih ada video play → jangan nyalain musik
+
+    if (currentAudio && currentAudio.paused && currentSongId) {
+        currentAudio.play().catch(() => {});
+
+        const btn = document.getElementById(`playBtn-${currentSongId}`);
+        if (btn) btn.textContent = "⏸";
+        document.getElementById(`songCard-${currentSongId}`)?.classList.add("playing");
+
+        document.getElementById("nowPlayingBtn").textContent = "⏸";
+    }
+}
+
+// Pasang event ke SEMUA video yang punya class .kelas-video
+document.querySelectorAll(".kelas-video").forEach(video => {
+
+    // Saat salah satu video play:
+    // 1. Pause semua video lain
+    // 2. Pause musik
+    video.addEventListener("play", () => {
+        document.querySelectorAll(".kelas-video").forEach(v => {
+            if (v !== video && !v.paused) v.pause();
+        });
+        pauseMusicForVideo();
+    });
+
+    // Saat video di-pause / selesai → coba nyalain musik lagi
+    video.addEventListener("pause", resumeMusicAfterVideo);
+    video.addEventListener("ended", resumeMusicAfterVideo);
+});
 
 </script>
 
