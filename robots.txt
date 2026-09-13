@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://11tkj2smknsituraja.github.io/web-kelas/sitemap.xml
