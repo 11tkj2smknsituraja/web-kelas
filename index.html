@@ -2259,7 +2259,7 @@ function closeSplash() {
     // langsung stel lagu pertama begitu masuk website
     // (dipicu dari klik tombol biar ga kena blokir autoplay browser)
     if (songs.length > 0 && !currentAudio) {
-        playSong(songs[4].id);
+        playSong(getRandomSongId());
     }
 
   }
@@ -2586,6 +2586,15 @@ function renderSongs() {
 }
 
 
+function getRandomSongId(excludeId = null) {
+    if (!songs.length) return null;
+    if (songs.length === 1) return songs[0].id;
+
+    // ambil lagu random, pastikan beda sama yang lagi/ baru aja diputar
+    const pool = songs.filter(s => s.id !== excludeId);
+    return pool[Math.floor(Math.random() * pool.length)].id;
+}
+
 function playSong(id) {
 
     const song = songs.find(s => s.id === id);
@@ -2653,15 +2662,8 @@ function playSong(id) {
         document.getElementById(`playBtn-${id}`).textContent = "▶";
         document.getElementById(`songCard-${id}`)?.classList.remove("playing");
 
-        // lanjut otomatis ke lagu berikutnya, balik ke awal kalau udah abis
-        const currentIndex = songs.findIndex(s => s.id === id);
-        const nextSong = songs[currentIndex + 1] || songs[0];
-
-        if (nextSong) {
-            playSong(nextSong.id);
-        } else {
-            document.getElementById("nowPlaying").classList.remove("show");
-        }
+        // lanjut otomatis ke lagu ACAK (ga bakal ngulang lagu yang sama)
+        playSong(getRandomSongId(id));
 
     };
 
